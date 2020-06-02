@@ -7,7 +7,7 @@
 
 namespace=${1:-"default"}
 
-for resourceType in $(kubectl api-resources --verbs=list --namespaced -o name); do
+for resourceType in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v event); do
         resources=$(kubectl -n ${namespace} get --ignore-not-found $resourceType)
         j=0
         while read -r line; do
